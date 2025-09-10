@@ -1,0 +1,25 @@
+ /* Estilos personalizados con la paleta de colores */
+        .thead-custom {
+            background-color: #522a70;
+            color: #faf8f3;
+        }
+
+        .btn-edit {
+            background-color: #fbd050;
+            color: #222023;
+            border: none;
+        }
+        .btn-edit:hover {
+            background-color: #e4b848;
+            color: #222023;
+        }
+
+        .btn-delete {
+            background-color: #f29cb7;
+            color: #222023;
+            border: none;
+        }
+        .btn-delete:hover {
+            background-color: #d98ba1;
+            color: #222023;
+        }

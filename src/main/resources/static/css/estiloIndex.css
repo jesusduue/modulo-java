@@ -1,0 +1,136 @@
+body {
+            background-color: #faf8f3;
+            font-family: 'Comic Neue', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .header {
+            background-color: #522a70;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            color: white;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 200px;
+            height: auto;
+            background-color: #fbd050;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            color: #fbd050;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background-color: #faeadd;
+            border-top: 1px solid #f29cb7;
+        }
+        
+        .btn-custom {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            font-family: 'Comic Neue', cursive;
+            background-color: #f29cb7;
+            color: #222023;
+            cursor: pointer;
+        }
+        
+        .btn-custom:hover {
+            background-color: #fbd050;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-custom:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(251, 208, 80, 0.3);
+        }
+        
+        .btn-primary {
+            background-color: #522a70;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #fbd050;
+            color: #222023;
+        }
+        
+        .content {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #522a70;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-custom {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+        }
