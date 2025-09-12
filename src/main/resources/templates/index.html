@@ -9,24 +9,28 @@
     <!-- Google Fonts - FunnyNote (simulated with a similar playful font) -->
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/estiloIndex.css">
+    <!-- <link rel="stylesheet" ref="/css/estiloIndex.css"> -->
+
+     <link rel="stylesheet" th:href="@{/css/estiloIndex.css}"> <!-- Thymeleaf rutas en java -->
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="logo-container">
                 <div class="logo">
-                    <img src="/img/logo-teeker.png" alt="Logo">
+                    <!-- <img src="/img/logo-teeker.png" alt="Logo"> -->
+                    <img th:src="@{/img/logo-teeker.png}" alt="Logo"> <!-- Thymeleaf rutas en java -->
                 </div>
             </div>
             <h1 class="main-title">Módulo Seguridad</h1>
         </div>
         
         <div class="button-container">
-            <a href="/rol_fan_pag.html" class="btn-custom">Rol Fan Page</a>
-            <a href="/usuario.html" class="btn-custom">Usuario</a>
-            <a href="/rol.html" class="btn-custom">Rol</a>
-            <a href="/tipo_privacidad.html" class="btn-custom">Tipo Privacidad</a>
+            <!-- <a href="/rol_fan_pag.html" class="btn-custom">Rol Fan Page</a> -->
+            <a th:href="@{/rol_fan_pag}" class="btn-custom">Rol Fan Page</a> <!-- Thymeleaf rutas en java -->
+            <a th:href="@{/usuario}" class="btn-custom">Usuario</a>
+            <a th:href="@{/rol}" class="btn-custom">Rol</a>
+            <a th:href="@{/tipo_privacidad}" class="btn-custom">Tipo Privacidad</a>
         </div>
         
         <div class="content">
