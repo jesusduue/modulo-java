@@ -49,31 +49,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Fila de ejemplo 1 -->
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Usuario Ejemplo 1</td>
-                            <td>Fan Page de Cocina</td>
-                            <td>Administrador</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
-                                <button class="btn btn-delete btn-sm">Eliminar</button>
-                            </td>
-                        </tr>
-                        <!-- Fila de ejemplo 2 -->
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Usuario Ejemplo 2</td>
-                            <td>Fan Page de Deportes</td>
-                            <td>Editor</td>
-                            <td>Inactivo</td>
-                            <td>
-                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
-                                <button class="btn btn-delete btn-sm">Eliminar</button>
-                            </td>
-                        </tr>
                         <!-- Las filas se agregarán dinámicamente aquí -->
+                         <tr th:if="${#lists.isEmpty(rolFanPags)}">
+                            <td colspan="6" class="text-center">No hay roles disponibles</td>
+                        </tr>
+                        <tr th:each="rolFanPag, iterStat : ${rolFanPags}">
+                            <th scope="row" th:text="${rolFanPag.cod_rol_fan}"></th>
+                            <td th:text="${rolFanPag.persona.nm1_per}"></td>
+                            <td th:text="${rolFanPag.fan_page.nom_fan_pag}"></td>
+                            <td th:text="${rolFanPag.rol.nom_rol}"></td>
+                            <td th:text="${rolFanPag.est_rol_fan}"></td>
+                            <td>
+                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
+                                <button class="btn btn-delete btn-sm">Eliminar</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

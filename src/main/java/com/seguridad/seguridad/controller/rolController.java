@@ -1,15 +1,27 @@
 package com.seguridad.seguridad.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.seguridad.seguridad.models.Rol;
+import com.seguridad.seguridad.repository.RolRepository;
+
 
 @Controller
 public class rolController {
-   @GetMapping("/rol")
-   //showRolView() es un metodo de controlador en una aplicacion web de spring. su objetivo es manejar las peticiones http get que llegan a la ruta /rol y devolver el nombre de la vista que debe ser renderizada 
-   public String showRolView() {
-       return "rol"; // Nombre de la vista a retornar
-   }
-   
-}
 
+    //inyectamos la dependencia del repositorio
+   @Autowired
+   private RolRepository rolRepository;
+    //funcion para listar los roles
+    @GetMapping("/rol")
+    public String RolListar(Model models) {
+        List<Rol> rols = rolRepository.findAll();
+        models.addAttribute("rols", rols);
+        return "rol";
+    }
+}

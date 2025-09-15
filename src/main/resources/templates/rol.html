@@ -40,11 +40,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Administrador</td>
-                            <td>Acceso total al sistema.</td>
-                            <td>Activo</td>
+                        <tr th:if="${#lists.isEmpty(rols)}">
+                            <td colspan="5" class="text-center">No hay aroles disponibles</td>
+                        </tr>
+                        <tr th:each="rol : ${rols}">
+                            <th scope="row" th:text="${rol.cod_rol}"></th>
+                            <td th:text="${rol.nom_rol}"></td>
+                            <td th:text="${rol.des_rol}"></td>
+                            <td th:text="${rol.est_rol}"></td>
                             <td>
                                 <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
                                 <button class="btn btn-delete btn-sm">Eliminar</button>

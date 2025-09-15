@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "rol_fan_page", schema = "seguridad")
+@Table(name = "rol_fan_pag", schema = "seguridad")
 public class Rol_Fan_Page {
     
     @Id

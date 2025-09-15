@@ -35,22 +35,29 @@
                             <th scope="col">#</th>
                             <th scope="col">Alias</th>
                             <th scope="col">Email</th>
+                            <th scope="col">password</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>teeker_user</td>
-                            <td>user@teeker.com</td>
-                            <td>Activo</td>
+                        <tr th:if="${#lists.isEmpty(usuarios)}">
+                            <td colspan="5" class="text-center">No hay usuarios disponibles</td>
+                        </tr>
+                        <tr th:each="usuario, iterStat : ${usuarios}">
+                            <th scope="row" th:text="${usuario.cod_usu}"></th>
+                            <td th:text="${usuario.ali_usu}"></td>
+                            <td th:text="${usuario.ema_usu}"></td>
+                            <td th:text="${usuario.cla_usu}"></td>
+                            <td th:text="${usuario.est_usu}"></td>
                             <td>
                                 <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
                                 <button class="btn btn-delete btn-sm">Eliminar</button>
                             </td>
                         </tr>
                     </tbody>
+
+                    
                 </table>
             </div>
         </div>

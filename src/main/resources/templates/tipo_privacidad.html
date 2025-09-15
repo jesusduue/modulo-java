@@ -39,19 +39,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Público</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
-                                <button class="btn btn-delete btn-sm">Eliminar</button>
-                            </td>
+                        <tr th:if="${#lists.isEmpty(tipoPrivlList)}">
+                            <td colspan="4" class="text-center">No hay tipos de privacidad disponibles.</td>
                         </tr>
-                         <tr>
-                            <th scope="row">2</th>
-                            <td>Solo Amigos</td>
-                            <td>Activo</td>
+                        <tr th:each="tipo_privacidad, iterStat : ${tipoPrivlList}">
+                            <th scope="row" th:text="${tipo_privacidad.cod_tip}"></th>
+                            <td th:text="${tipo_privacidad.nom_tip}"></td>
+                            <td th:text="${tipo_privacidad.est_tip}"></td>
                             <td>
                                 <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
                                 <button class="btn btn-delete btn-sm">Eliminar</button>

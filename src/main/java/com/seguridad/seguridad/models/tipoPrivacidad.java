@@ -12,7 +12,7 @@ public class tipoPrivacidad {
     private int cod_tip;
 
     @Column (name = "nom_tip")
-    private String des_tip;
+    private String nom_tip;
 
     @Column (name = "est_tip")
     private String est_tip;
@@ -24,14 +24,14 @@ public class tipoPrivacidad {
         this.cod_tip = cod_tip;
     }
 
-    public tipoPrivacidad(int cod_tip, String des_tip, String est_tip) {
+    public tipoPrivacidad(int cod_tip, String nom_tip, String est_tip) {
         this.cod_tip = cod_tip;
-        this.des_tip = des_tip;
+        this.nom_tip = nom_tip;
         this.est_tip = est_tip;
     }
 
-    public tipoPrivacidad(String des_tip, String est_tip) {
-        this.des_tip = des_tip;
+    public tipoPrivacidad(String nom_tip, String est_tip) {
+        this.nom_tip = nom_tip;
         this.est_tip = est_tip;
     }
 
@@ -43,12 +43,12 @@ public class tipoPrivacidad {
         this.cod_tip = cod_tip;
     }
 
-    public String getDes_tip() {
-        return des_tip;
+    public String getNom_tip() {
+        return nom_tip;
     }
 
-    public void setDes_tip(String des_tip) {
-        this.des_tip = des_tip;
+    public void setNom_tip(String nom_tip) {
+        this.nom_tip = nom_tip;
     }
 
     public String getEst_tip() {

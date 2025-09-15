@@ -1,14 +1,26 @@
 package com.seguridad.seguridad.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.seguridad.seguridad.models.Rol_Fan_Page;
+import com.seguridad.seguridad.repository.rolFanPagRepository;
+
 
 @Controller
 public class rolFanPagController {
-   @GetMapping("/rol_fan_pag")
-   //showRolFanPagView() es un metodo de controlador en una aplicacion web de spring. su objetivo es manejar las peticiones http get que llegan a la ruta /rolFanPag y devolver el nombre de la vista que debe ser renderizada 
-   public String showRolFanPagView() {
-       return "rol_fan_pag"; // Nombre de la vista a retornar
-   }
-   
+
+    @Autowired
+    private rolFanPagRepository rolFanPagRepository;
+    @GetMapping("/rol_fan_pag")
+    public String RolFanPag(Model models) {
+        List<Rol_Fan_Page> rolFanPags = rolFanPagRepository.findAll();
+        models.addAttribute("rolFanPags", rolFanPags);
+        return "rol_fan_pag";
+    }
+
 }
