@@ -44,10 +44,10 @@
                             <td colspan="5" class="text-center">No hay aroles disponibles</td>
                         </tr>
                         <tr th:each="rol : ${rols}">
-                            <th scope="row" th:text="${rol.cod_rol}"></th>
-                            <td th:text="${rol.nom_rol}"></td>
-                            <td th:text="${rol.des_rol}"></td>
-                            <td th:text="${rol.est_rol}"></td>
+                            <th scope="row" th:text="${rol.getCod_rol()}"></th>
+                            <td th:text="${rol.getNom_rol()}"></td>
+                            <td th:text="${rol.getDes_rol()}"></td>
+                            <td th:text="${rol.getEst_rol()}"></td>
                             <td>
                                 <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
                                 <button class="btn btn-delete btn-sm">Eliminar</button>
@@ -59,8 +59,8 @@
         </div>
     </div>
 
-    <!-- Modal para Agregar Rol -->
-    <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <!-- Modal para Agregar Rol CON JAVA -->
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #faeadd;">
@@ -68,28 +68,32 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form th:action="@{/rol}" th:object="${rol}" method="post">
+                        <div class="mb-3">
+                            <label for="cod_rol" class="form-label">Código del Rol</label>
+                            <input type="number" class="form-control" th:field="*{cod_rol}" required>
+                        </div>
                         <div class="mb-3">
                             <label for="nom_rol" class="form-label">Nombre del Rol</label>
-                            <input type="text" class="form-control" id="nom_rol" required>
+                            <input type="text" class="form-control" th:field="*{nom_rol}" required>
                         </div>
                         <div class="mb-3">
                             <label for="des_rol" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="des_rol" rows="3" required></textarea>
+                            <textarea class="form-control" th:field="*{des_rol}" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="est_rol" class="form-label">Estado</label>
-                            <select class="form-select" id="est_rol" required>
+                            <select class="form-select" th:field="*{est_rol}" required>
                                 <option selected disabled value="">Seleccione...</option>
                                 <option value="A">Activo</option>
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-primary" style="background-color: #522a70;">Agregar</button>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" style="background-color: #522a70;">Guardar</button>
                 </div>
             </div>
         </div>
