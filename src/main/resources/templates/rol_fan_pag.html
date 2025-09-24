@@ -71,7 +71,7 @@
     </div>
 
     <!-- Modal para Agregar Rol Fan Page -->
-    <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #faeadd;">
@@ -79,48 +79,46 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form th:action="@{/rol_fan_pag}" th:object="${rolFanPag}" method="post">
+                        <div class="mb-3">
+                            <label for="cod_rol_fan" class="form-label">Código</label>
+                            <input type="number" class="form-control" th:field="*{cod_rol_fan}" required>
+                        </div>
+
                         <div class="mb-3">
                             <label for="fky_per" class="form-label">Persona (Usuario)</label>
-                            <select class="form-select" id="fky_per" required>
+                            <select class="form-select" th:field="*{persona}" required>
                                 <option selected disabled value="">Seleccione una persona...</option>
-                                <!-- Opciones cargadas dinámicamente -->
-                                <option value="1">Usuario Ejemplo 1</option>
-                                <option value="2">Usuario Ejemplo 2</option>
+                                <option th:each="persona : ${personas}" th:value="${persona.cod_per}" th:text="${persona.nm1_per}"></option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="fky_fan_pag" class="form-label">Fan Page</label>
-                            <select class="form-select" id="fky_fan_pag" required>
+                            <select class="form-select" th:field="*{fan_page}" required>
                                 <option selected disabled value="">Seleccione una Fan Page...</option>
-                                <!-- Opciones cargadas dinámicamente -->
-                                <option value="1">Fan Page de Cocina</option>
-                                <option value="2">Fan Page de Deportes</option>
+                                <option th:each="fp : ${fanPages}" th:value="${fp.cod_fan_pag}" th:text="${fp.nom_fan_pag}"></option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="fky_rol" class="form-label">Rol</label>
-                            <select class="form-select" id="fky_rol" required>
+                            <select class="form-select" th:field="*{rol}" required>
                                 <option selected disabled value="">Seleccione un rol...</option>
-                                <!-- Opciones cargadas dinámicamente -->
-                                <option value="1">Administrador</option>
-                                <option value="2">Editor</option>
-                                <option value="3">Moderador</option>
+                                <option th:each="rol : ${roles}" th:value="${rol.cod_rol}" th:text="${rol.nom_rol}"></option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="est_rol_fan" class="form-label">Estado</label>
-                            <select class="form-select" id="est_rol_fan" required>
+                            <select class="form-select" th:field="*{est_rol_fan}" required>
                                 <option selected disabled value="">Seleccione un estado...</option>
                                 <option value="A">Activo</option>
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
+                         <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #522a70;">Guardar Cambios</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" style="background-color: #522a70;">Guardar Cambios</button>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="./css/estiloIndex.css">
     <link rel="stylesheet" href="./css/estiloRolFanPag.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -20,12 +22,12 @@
             </div>
             <h1 class="main-title">Gestionar Tipos de Privacidad</h1>
         </div>
-        
+
         <div class="button-container">
             <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar</button>
             <a th:href="@{/}" class="btn-custom btn-primary">Volver a Index</a>
         </div>
-        
+
         <div class="content">
             <h2 class="section-title">Listado de Tipos de Privacidad</h2>
             <div class="table-responsive">
@@ -47,7 +49,8 @@
                             <td th:text="${tipo_privacidad.nom_tip}"></td>
                             <td th:text="${tipo_privacidad.est_tip}"></td>
                             <td>
-                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
+                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#editarModal">Editar</button>
                                 <button class="btn btn-delete btn-sm">Eliminar</button>
                             </td>
                         </tr>
@@ -62,28 +65,38 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #faeadd;">
-                    <h5 class="modal-title" id="agregarModalLabel" style="color: #522a70;">Agregar Nuevo Tipo de Privacidad</h5>
+                    <h5 class="modal-title" id="agregarModalLabel" style="color: #522a70;">Agregar Nuevo Tipo de
+                        Privacidad</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form th:action="@{/tipo_privacidad}" th:object="${tipoPrivacidad}" method="post">
+                        <div>
+                            <label for="cod_tip" class="form-label">Código</label>
+                            <input type="text" class="form-control" id="cod_tip" th:field="*{cod_tip}" required>
+                        </div>
                         <div class="mb-3">
                             <label for="nom_tip" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nom_tip" required>
+                            <input type="text" class="form-control" id="nom_tip" th:field="*{nom_tip}" required>
                         </div>
                         <div class="mb-3">
                             <label for="est_tip" class="form-label">Estado</label>
-                            <select class="form-select" id="est_tip" required>
+                            <select class="form-select" id="est_tip" th:field="*{est_tip}" required>
                                 <option selected disabled value="">Seleccione...</option>
                                 <option value="A">Activo</option>
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: #522a70;">Guardar</button>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" style="background-color: #522a70;">Guardar</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: #522a70;">Guardar</button>
                 </div>
             </div>
         </div>
@@ -99,7 +112,7 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <label for="nom_tip_edit" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nom_tip_edit" value="Público" required>
                         </div>
@@ -114,7 +127,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" style="background-color: #fbd050; color: #222023; border:none;">Actualizar</button>
+                    <button type="button" class="btn btn-primary"
+                        style="background-color: #fbd050; color: #222023; border:none;">Actualizar</button>
                 </div>
             </div>
         </div>
@@ -122,5 +136,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

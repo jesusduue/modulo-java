@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuario", schema = "seguridad")
-public class usuario {
+public class Usuario {
     @Id
     @Column (name = "cod_usu")
     private int cod_usu;
@@ -24,14 +24,14 @@ public class usuario {
     @Column (name = "est_usu")
     private String est_usu;
 
-    public usuario() {
+    public Usuario() {
     }
 
-    public usuario(int cod_usu) {
+    public Usuario(int cod_usu) {
         this.cod_usu = cod_usu;
     }
 
-    public usuario(int cod_usu, String ali_usu, String ema_usu, String cla_usu, String est_usu) {
+    public Usuario(int cod_usu, String ali_usu, String ema_usu, String cla_usu, String est_usu) {
         this.cod_usu = cod_usu;
         this.ali_usu = ali_usu;
         this.ema_usu = ema_usu;
@@ -39,7 +39,7 @@ public class usuario {
         this.est_usu = est_usu;
     }
 
-    public usuario(String ali_usu, String cla_usu, String ema_usu, String est_usu) {
+    public Usuario(String ali_usu, String cla_usu, String ema_usu, String est_usu) {
         this.ali_usu = ali_usu;
         this.cla_usu = cla_usu;
         this.ema_usu = ema_usu;

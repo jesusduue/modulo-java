@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table (name = "tipo_privacidad", schema = "seguridad")
-public class tipoPrivacidad {
+public class TipoPrivacidad {
     @Id
     @Column (name = "cod_tip")
     private int cod_tip;
@@ -17,20 +17,20 @@ public class tipoPrivacidad {
     @Column (name = "est_tip")
     private String est_tip;
 
-    public tipoPrivacidad() {
+    public TipoPrivacidad() {
     }
 
-    public tipoPrivacidad(int cod_tip) {
+    public TipoPrivacidad(int cod_tip) {
         this.cod_tip = cod_tip;
     }
 
-    public tipoPrivacidad(int cod_tip, String nom_tip, String est_tip) {
+    public TipoPrivacidad(int cod_tip, String nom_tip, String est_tip) {
         this.cod_tip = cod_tip;
         this.nom_tip = nom_tip;
         this.est_tip = est_tip;
     }
 
-    public tipoPrivacidad(String nom_tip, String est_tip) {
+    public TipoPrivacidad(String nom_tip, String est_tip) {
         this.nom_tip = nom_tip;
         this.est_tip = est_tip;
     }
