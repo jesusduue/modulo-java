@@ -25,4 +25,14 @@ public interface  RolRepository extends JpaRepository<Rol, Integer> {
     @Transactional
     @Query(value="SELECT seguridad.rol_agregar(:cod_rol, :nom_rol, :des_rol, :est_rol)", nativeQuery= true)
     Integer rol_agregar(@Param("cod_rol") Integer cod_rol, @Param("nom_rol") String nom_rol, @Param("des_rol") String des_rol, @Param("est_rol") String est_rol);
+
+    //metodo para modificar
+     @Transactional
+    @Query(value="SELECT seguridad.rol_modificar(:cod_rol,:nom_rol,:des_rol,:est_rol)", nativeQuery=true)
+    Integer rol_modificar(@Param("cod_rol") int cod_rol, @Param("nom_rol") String nom_rol, @Param("des_rol") String des_rol, @Param("est_rol") String est_rol);
+
+    //Metodo para Eliminar
+    @Transactional
+    @Query(value="SELECT seguridad.rol_eliminar(:cod_rol)", nativeQuery=true)
+    Integer rol_eliminar(@Param("cod_rol") int cod_rol);
 }

@@ -25,4 +25,19 @@ public class RolServicio {
     public void agregarRol(Rol rol){
         rolRepository.rol_agregar(rol.getCod_rol(), rol.getNom_rol(), rol.getDes_rol(), rol.getEst_rol());
     }
+    //servicio para modificar
+    public Integer modificarRol(Rol rol){
+        return rolRepository.rol_modificar(rol.getCod_rol(), rol.getNom_rol(), rol.getDes_rol(), rol.getEst_rol());
+    }   
+
+    //servicio para eliminar
+    public Integer eliminarRol(int cod_rol){
+      return rolRepository.rol_eliminar(cod_rol);
+    }
+
+    //buscar por id
+    public Rol buscarPorId(int cod_rol){
+        return rolRepository.findById(cod_rol).orElse(null);
+    }
+
 }

@@ -47,15 +47,31 @@
                             <td colspan="5" class="text-center">No hay usuarios disponibles</td>
                         </tr>
                         <tr th:each="usuario, iterStat : ${usuarios}">
-                            <th scope="row" th:text="${usuario.cod_usu}"></th>
-                            <td th:text="${usuario.ali_usu}"></td>
-                            <td th:text="${usuario.ema_usu}"></td>
-                            <td th:text="${usuario.cla_usu}"></td>
-                            <td th:text="${usuario.est_usu}"></td>
+                            <th scope="row" th:text="${usuario.getCod_usu()}"></th>
+                            <td th:text="${usuario.getAli_usu()}"></td>
+                            <td th:text="${usuario.getEma_usu()}"></td>
+                            <td th:text="${usuario.getCla_usu()}"></td>
+                            <td th:text="${usuario.getEst_usu()}"></td>
                             <td>
-                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editarModal">Editar</button>
-                                <button class="btn btn-delete btn-sm">Eliminar</button>
+                                <!-- Boton para editar y pasar los datos al modal modificar -->
+                                <button 
+                                 type="button"
+                                 class="btn btn-edit btn-sm" 
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#editarModal" 
+                                 th:attr="data-id=${usuario.cod_usu},
+                                         data-nombre=${usuario.ali_usu},                       
+                                         data-correo=${usuario.ema_usu},
+                                         data-clave=${usuario.cla_usu},
+                                         data-estado=${usuario.est_usu}">
+                                Editar
+                                </button>
+
+                                <!-- Boton para eliminar -->
+                                <form th:action="@{/usuario/eliminar}" method="post" style="display:inline;">
+                                    <input type="hidden" name="cod_usu" th:value="${usuario.getCod_usu()}" />
+                                    <button type="submit" class="btn btn-delete btn-sm">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
                     </tbody>
@@ -75,35 +91,37 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/usuario}" th:object="${usuario}"  method="post">
+                    <form th:action="@{/usuario}" th:object="${usuario}" method="post">
                         <div class="mb-3">
                             <label for="cod_usu" class="form-label">Código</label>
-                            <input type="text" class="form-control" th:field="*{cod_usu}" required>
+                            <!-- tambien se puede cambiar el name="cod_usu" por th:fiel="*{cod_usu}"  -->
+                            <input type="text" class="form-control" id="cod_usu" name="cod_usu" required> 
                         </div>
                         <div class="mb-3">
                             <label for="ali_usu" class="form-label">Alias</label>
-                            <input type="text" class="form-control" th:field="*{ali_usu}" required>
+                            <input type="text" class="form-control" id="ali_usu" name="ali_usu" required>
                         </div>
                         <div class="mb-3">
                             <label for="ema_usu" class="form-label">Email</label>
-                            <input type="email" class="form-control" th:field="*{ema_usu}" required>
+                            <input type="email" class="form-control" id="ema_usu" name="ema_usu" required>
                         </div>
                         <div class="mb-3">
                             <label for="cla_usu" class="form-label">Clave</label>
-                            <input type="password" class="form-control" th:field="*{cla_usu}" required>
+                            <input type="password" class="form-control" id="cla_usu" name="cla_usu" required>
                         </div>
                         <div class="mb-3">
                             <label for="est_usu" class="form-label">Estado</label>
-                            <select class="form-select" th:field="*{est_usu}" required>
+                            <select class="form-select" id="est_usu" name="est_usu" required>
                                 <option selected disabled value="">Seleccione...</option>
                                 <option value="A">Activo</option>
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
-                                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" style="background-color: #522a70;">Guardar</button>
-                </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: #522a70;">Guardar</button>
+                        </div>
                     </form>
                 </div>
 
@@ -119,39 +137,42 @@
                     <h5 class="modal-title" id="editarModalLabel" style="color: #522a70;">Editar Usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                
+                    <form th:action="@{/usuario/modificar}" method="post">
+                            <input type="hidden" id="cod_usu_edit" name="cod_usu">
+                  <div class="modal-body">   
                         <div class="mb-3">
                             <label for="ali_usu_edit" class="form-label">Alias</label>
-                            <input type="text" class="form-control" id="ali_usu_edit" value="teeker_user" required>
+                            <input type="text" class="form-control" id="ali_usu_edit" name="ali_usu"  autocomplete="username" required>
                         </div>
                         <div class="mb-3">
                             <label for="ema_usu_edit" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="ema_usu_edit" value="user@teeker.com" required>
+                            <input type="email" class="form-control" id="ema_usu_edit" name="ema_usu" autocomplete="email"  required>
                         </div>
                         <div class="mb-3">
                             <label for="cla_usu_edit" class="form-label">Nueva Clave (Opcional)</label>
-                            <input type="password" class="form-control" id="cla_usu_edit">
+                            <input type="password" autocomplete="current-password" class="form-control" id="cla_usu_edit" name="cla_usu">
                         </div>
                         <div class="mb-3">
                             <label for="est_usu_edit" class="form-label">Estado</label>
-                            <select class="form-select" id="est_usu_edit" required>
+                            <select class="form-select" id="est_usu_edit" name="est_usu" required>
                                 <option value="A" selected>Activo</option>
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary"
+                    <button type="submit" class="btn btn-primary"
                         style="background-color: #fbd050; color: #222023; border:none;">Actualizar</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./scripts/modalEditarUsuario.js"></script>
 </body>
 
 </html>

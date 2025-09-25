@@ -23,4 +23,14 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query(value="SELECT seguridad.usuario_agregar(:cod_usu, :ali_usu, :ema_usu, :cla_usu, :est_usu )", nativeQuery=true)
     Integer usuario_agregar(@Param("cod_usu") Integer cod_usu, @Param("ali_usu") String ali_usu, @Param("ema_usu") String ema_usu, @Param("cla_usu") String cla_usu, @Param("est_usu") String est_usu);
 
+    //metodo para modificar
+     @Transactional
+    @Query(value="SELECT seguridad.usuario_modificar(:cod_usu, :ali_usu, :ema_usu, :cla_usu, :est_usu )", nativeQuery=true)
+    Integer usuario_modificar(@Param("cod_usu") Integer cod_usu, @Param("ali_usu") String ali_usu, @Param("ema_usu") String ema_usu, @Param("cla_usu") String cla_usu, @Param("est_usu") String est_usu);
+
+    //metodo para eliminar
+    @Transactional
+    @Query(value="SELECT seguridad.usuario_eliminar(:cod_usu)", nativeQuery=true)
+    Integer usuario_eliminar(@Param("cod_usu") int cod_usu);
+    
 }

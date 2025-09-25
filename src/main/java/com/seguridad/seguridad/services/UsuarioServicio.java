@@ -24,4 +24,18 @@ public class UsuarioServicio {
         usuarioRepository.usuario_agregar(usuario.getCod_usu(),usuario.getAli_usu(), usuario.getEma_usu(),usuario.getCla_usu(),usuario.getEst_usu());
     }
     
+    //servicio para modificar
+    public Integer modificarUsuario(Usuario usuario){
+        return usuarioRepository.usuario_modificar(usuario.getCod_usu(),usuario.getAli_usu(), usuario.getEma_usu(),usuario.getCla_usu(),usuario.getEst_usu());
+    }
+     //servicio para eliminar
+    public Integer eliminarUsuario(int cod_usu){
+      return usuarioRepository.usuario_eliminar(cod_usu);
+    }
+
+    //servicio para buscar por id
+    public Usuario buscarPorId(int cod_usu){
+        return usuarioRepository.findById(cod_usu).orElse(null);
+    }
+    
 }
