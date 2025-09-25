@@ -23,4 +23,18 @@ public class TipoPrivacidadServicio {
     public void agregarTipoPrivacidad(TipoPrivacidad tipoPrivacidad){
         tipoPrivacidadRepository.tipo_privacidad_agregar(tipoPrivacidad.getCod_tip(), tipoPrivacidad.getNom_tip(), tipoPrivacidad.getEst_tip());
     }
+
+    //servicio para modificar
+    public Integer modificarTipoPrivacidad(TipoPrivacidad tipoPrivacidad){
+        return tipoPrivacidadRepository.tipo_privacidad_modificar(tipoPrivacidad.getCod_tip(), tipoPrivacidad.getNom_tip(), tipoPrivacidad.getEst_tip());
+    }
+
+    //servicio para eliminar
+    public Integer eliminarTipoPrivacidad(int cod_tip){
+        return tipoPrivacidadRepository.tipo_privacidad_eliminar(cod_tip);
+    }
+
+    public TipoPrivacidad buscarPorId(int cod_tip){
+        return tipoPrivacidadRepository.findById(cod_tip).orElse(null);
+    }
 }

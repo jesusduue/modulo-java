@@ -49,9 +49,17 @@
                             <td th:text="${tipo_privacidad.nom_tip}"></td>
                             <td th:text="${tipo_privacidad.est_tip}"></td>
                             <td>
-                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editarModal">Editar</button>
-                                <button class="btn btn-delete btn-sm">Eliminar</button>
+                                <!-- Boton para editar y pasar los datos al modal modificar -->
+                                <button type="button" class="btn btn-edit btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#editarModal" th:attr="data-id=${tipo_privacidad.cod_tip},
+                                         data-nombre=${tipo_privacidad.nom_tip},                       
+                                         data-estado=${tipo_privacidad.est_tip}">
+                                    Editar
+                                </button>
+                                <form th:action="@{/tipo_privacidad/eliminar}" method="post" style="display:inline;">
+                                    <input type="hidden" name="cod_tip" th:value="${tipo_privacidad.getCod_tip()}" />
+                                    <button type="submit" class="btn btn-delete btn-sm">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
                     </tbody>
@@ -69,8 +77,9 @@
                         Privacidad</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form th:action="@{/tipo_privacidad}" th:object="${tipoPrivacidad}" method="post">
+
+                <form th:action="@{/tipo_privacidad}" th:object="${tipoPrivacidad}" method="post">
+                    <div class="modal-body">
                         <div>
                             <label for="cod_tip" class="form-label">Código</label>
                             <input type="text" class="form-control" id="cod_tip" th:field="*{cod_tip}" required>
@@ -87,17 +96,13 @@
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary"
-                                style="background-color: #522a70;">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" style="background-color: #522a70;">Guardar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary"
+                            style="background-color: #522a70;">Guardar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -110,31 +115,35 @@
                     <h5 class="modal-title" id="editarModalLabel" style="color: #522a70;">Editar Tipo de Privacidad</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form>
+
+                <form th:action="@{/tipo_privacidad/modificar}" method="post">
+
+                    <input type="hidden" id="cod_tip_edit" name="cod_tip">
+                    <div class="modal-body">
                         <div class="mb-3">
                             <label for="nom_tip_edit" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nom_tip_edit" value="Público" required>
+                            <input type="text" class="form-control" id="nom_tip_edit" name="nom_tip" required>
                         </div>
                         <div class="mb-3">
                             <label for="est_tip_edit" class="form-label">Estado</label>
-                            <select class="form-select" id="est_tip_edit" required>
+                            <select class="form-select" id="est_tip_edit" name="est_tip" required>
                                 <option value="A" selected>Activo</option>
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary"
-                        style="background-color: #fbd050; color: #222023; border:none;">Actualizar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary"
+                            style="background-color: #fbd050; color: #222023; border:none;">Actualizar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./scripts/modalEditarTipoPrivacidad.js"></script>
 </body>
 
 </html>
