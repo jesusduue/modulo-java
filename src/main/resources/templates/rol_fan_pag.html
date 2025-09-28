@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,10 @@
     <link rel="stylesheet" href="./css/estiloIndex.css">
     <link rel="stylesheet" href="./css/estiloRolFanPag.css">
     <style>
-       
+
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -25,14 +27,14 @@
             </div>
             <h1 class="main-title">Gestionar Rol Fan Page</h1>
         </div>
-        
+
         <div class="button-container">
             <!-- Botón para abrir el modal de agregar -->
             <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar</button>
-           <!--  <a href="index.html" class="btn-custom btn-primary">Volver a Index</a> -->
-                <a th:href="@{/}" class="btn-custom btn-primary">Volver a Index</a>
+            <!--  <a href="index.html" class="btn-custom btn-primary">Volver a Index</a> -->
+            <a th:href="@{/}" class="btn-custom btn-primary">Volver a Index</a>
         </div>
-        
+
         <div class="content">
             <h2 class="section-title">Listado de Roles para Fan Page</h2>
             <!-- Tabla para listar los datos -->
@@ -50,7 +52,7 @@
                     </thead>
                     <tbody>
                         <!-- Las filas se agregarán dinámicamente aquí -->
-                         <tr th:if="${#lists.isEmpty(rolFanPags)}">
+                        <tr th:if="${#lists.isEmpty(rolFanPags)}">
                             <td colspan="6" class="text-center">No hay roles disponibles</td>
                         </tr>
                         <tr th:each="rolFanPag, iterStat : ${rolFanPags}">
@@ -60,8 +62,23 @@
                             <td th:text="${rolFanPag.rol.nom_rol}"></td>
                             <td th:text="${rolFanPag.est_rol_fan}"></td>
                             <td>
-                                <button class="btn btn-edit btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
-                                <button class="btn btn-delete btn-sm">Eliminar</button>
+                                <!-- Botón para abrir el modal de edición -->
+                                <button 
+                                type="button"
+                                class="btn btn-edit btn-sm" 
+                                data-bs-toggle="modal"
+                                data-bs-target="#editarModal"
+                                th:attr="data-id=${rolFanPag.cod_rol_fan},
+                                        data-persona=${rolFanPag.persona.cod_per},                       
+                                        data-fanpage=${rolFanPag.fan_page.cod_fan_pag},
+                                        data-rol=${rolFanPag.rol.cod_rol},
+                                        data-estado=${rolFanPag.est_rol_fan}">
+                                Editar</button>
+                                <!-- Boton para eliminar -->
+                                <form th:action="@{/rol_fan_pag/eliminar}" method="post" style="display:inline;">
+                                    <input type="hidden" name="cod_rol_fan" th:value="${rolFanPag.cod_rol_fan}" />
+                                    <button type="submit" class="btn btn-delete btn-sm">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
                     </tbody>
@@ -71,11 +88,12 @@
     </div>
 
     <!-- Modal para Agregar Rol Fan Page -->
-<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #faeadd;">
-                    <h5 class="modal-title" id="agregarModalLabel" style="color: #522a70;">Agregar Nuevo Rol a Fan Page</h5>
+                    <h5 class="modal-title" id="agregarModalLabel" style="color: #522a70;">Agregar Nuevo Rol a Fan Page
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -89,21 +107,24 @@
                             <label for="fky_per" class="form-label">Persona (Usuario)</label>
                             <select class="form-select" th:field="*{persona}" required>
                                 <option selected disabled value="">Seleccione una persona...</option>
-                                <option th:each="persona : ${personas}" th:value="${persona.cod_per}" th:text="${persona.nm1_per}"></option>
+                                <option th:each="persona : ${personas}" th:value="${persona.cod_per}"
+                                    th:text="${persona.nm1_per}"></option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="fky_fan_pag" class="form-label">Fan Page</label>
                             <select class="form-select" th:field="*{fan_page}" required>
                                 <option selected disabled value="">Seleccione una Fan Page...</option>
-                                <option th:each="fp : ${fanPages}" th:value="${fp.cod_fan_pag}" th:text="${fp.nom_fan_pag}"></option>
+                                <option th:each="fp : ${fanPages}" th:value="${fp.cod_fan_pag}"
+                                    th:text="${fp.nom_fan_pag}"></option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="fky_rol" class="form-label">Rol</label>
                             <select class="form-select" th:field="*{rol}" required>
                                 <option selected disabled value="">Seleccione un rol...</option>
-                                <option th:each="rol : ${roles}" th:value="${rol.cod_rol}" th:text="${rol.nom_rol}"></option>
+                                <option th:each="rol : ${roles}" th:value="${rol.cod_rol}" th:text="${rol.nom_rol}">
+                                </option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -114,9 +135,10 @@
                                 <option value="I">Inactivo</option>
                             </select>
                         </div>
-                         <div class="modal-footer">
+                        <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary" style="background-color: #522a70;">Guardar Cambios</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #522a70;">Guardar
+                                Cambios</button>
                         </div>
                     </form>
                 </div>
@@ -125,62 +147,61 @@
     </div>
 
     <!-- Modal para Editar Rol Fan Page -->
-    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #faeadd;">
-                    <h5 class="modal-title" id="editarModalLabel" style="color: #522a70;">Editar Rol de Fan Page</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="fky_per_edit" class="form-label">Persona (Usuario)</label>
-                            <select class="form-select" id="fky_per_edit" required>
-                                <option selected disabled value="">Seleccione una persona...</option>
-                                <!-- Opciones se cargarán con JS -->
-                                <option value="1" selected>Usuario Ejemplo 1</option>
-                                <option value="2">Usuario Ejemplo 2</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fky_fan_pag_edit" class="form-label">Fan Page</label>
-                            <select class="form-select" id="fky_fan_pag_edit" required>
-                                <option selected disabled value="">Seleccione una Fan Page...</option>
-                                <!-- Opciones se cargarán con JS -->
-                                <option value="1" selected>Fan Page de Cocina</option>
-                                <option value="2">Fan Page de Deportes</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fky_rol_edit" class="form-label">Rol</label>
-                            <select class="form-select" id="fky_rol_edit" required>
-                                <option selected disabled value="">Seleccione un rol...</option>
-                                <!-- Opciones se cargarán con JS -->
-                                <option value="1" selected>Administrador</option>
-                                <option value="2">Editor</option>
-                                <option value="3">Moderador</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="est_rol_fan_edit" class="form-label">Estado</label>
-                            <select class="form-select" id="est_rol_fan_edit" required>
-                                <option selected disabled value="">Seleccione un estado...</option>
-                                <option value="A" selected>Activo</option>
-                                <option value="I">Inactivo</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" style="background-color: #fbd050; color: #222023; border:none;">Actualizar Cambios</button>
-                </div>
+<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #faeadd;">
+                <h5 class="modal-title" id="editarModalLabel" style="color: #522a70;">Editar Rol de Fan Page</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+<form th:action="@{/rol_fan_pag/modificar}" method="post">
+    <input type="hidden" id="cod_rol_fan_edit" name="cod_rol_fan">
+
+    <div class="mb-3">
+        <label for="fky_per_edit" class="form-label">Persona (Usuario)</label>
+        <select class="form-select" id="fky_per_edit" name="persona" required>
+            <option selected disabled value="">Seleccione una persona...</option>
+            <option th:each="persona : ${personas}" th:value="${persona.cod_per}" th:text="${persona.nm1_per}"></option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="fky_fan_pag_edit" class="form-label">Fan Page</label>
+        <select class="form-select" id="fky_fan_pag_edit" name="fan_page" required>
+            <option selected disabled value="">Seleccione una Fan Page...</option>
+            <option th:each="fp : ${fanPages}" th:value="${fp.cod_fan_pag}" th:text="${fp.nom_fan_pag}"></option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="fky_rol_edit" class="form-label">Rol</label>
+        <select class="form-select" id="fky_rol_edit" name="rol" required>
+            <option selected disabled value="">Seleccione un rol...</option>
+            <option th:each="rol : ${roles}" th:value="${rol.cod_rol}" th:text="${rol.nom_rol}"></option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="est_rol_fan_edit" class="form-label">Estado</label>
+        <select class="form-select" id="est_rol_fan_edit" name="est_rol_fan" required>
+            <option selected disabled value="">Seleccione un estado...</option>
+            <option value="A">Activo</option>
+            <option value="I">Inactivo</option>
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary"
+            style="background-color: #fbd050; color: #222023; border:none;">Actualizar
+            Cambios</button>
+    </div>
+</form>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./scripts/modalEditarRolFanPag.js"></script>
 </body>
+
 </html>

@@ -30,4 +30,18 @@ public interface RolFanPagRepository extends JpaRepository<Rol_Fan_Page, Integer
                               @Param("fky_rol") int fky_rol,
                               @Param("est_rol_fan") String est_rol_fan);
 
+    //metodo para modificar
+    @Transactional
+    @Query(value="SELECT seguridad.rol_fan_pag_modificar(:cod_rol_fan, :fky_per, :fky_fan_pag, :fky_rol, :est_rol_fan)", nativeQuery= true)
+    Integer rol_fan_pag_modificar(@Param("cod_rol_fan") int cod_rol_fan,
+                              @Param("fky_per") int fky_per,
+                              @Param("fky_fan_pag") int fky_fan_pag,
+                              @Param("fky_rol") int fky_rol,
+                              @Param("est_rol_fan") String est_rol_fan);
+                              
+    //metodo para eliminar
+    @Transactional
+    @Query(value="SELECT seguridad.rol_fan_pag_eliminar(:cod_rol_fan)", nativeQuery=true)
+    Integer rol_fan_pag_eliminar(@Param("cod_rol_fan") int cod_rol_fan);                          
+
 }

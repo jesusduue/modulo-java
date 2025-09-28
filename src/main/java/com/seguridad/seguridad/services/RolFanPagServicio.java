@@ -27,4 +27,23 @@ public class RolFanPagServicio {
             rolFanPage.getRol().getCod_rol(),
             rolFanPage.getEst_rol_fan()); 
     }
+
+    //servicio para eliminar 
+    public Integer eliminarRolFanPag(int cod_rol_fan){
+        return rolFanPagRepository.rol_fan_pag_eliminar(cod_rol_fan);
+    }
+
+    //Servicio para modificar
+    public Integer modificarRolFanPag(Rol_Fan_Page rolFanPage){
+        return rolFanPagRepository.rol_fan_pag_modificar(
+            rolFanPage.getCod_rol_fan(), 
+            rolFanPage.getPersona().getCod_per(), 
+            rolFanPage.getFan_page().getCod_fan_pag(), 
+            rolFanPage.getRol().getCod_rol(),
+            rolFanPage.getEst_rol_fan()); 
+    }
+    //servicio para buscar por id
+    public Rol_Fan_Page buscarPorId(int cod_rol_fan){
+        return rolFanPagRepository.findById(cod_rol_fan).orElse(null);
+}
 }

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seguridad.seguridad.models.Usuario;
 import com.seguridad.seguridad.services.UsuarioServicio;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  
 
 @Controller
@@ -43,7 +43,6 @@ public class usuarioController {
     @PostMapping("/usuario")
     //se usua @ModelAttribute para indicar que el objeto usuario, viiene de los datos del formulario
     public String agregarUsuario(@ModelAttribute Usuario usuario, RedirectAttributes redirect) {
-        //TODO: process POST request
         try {
             // log para saber si estan llegando los datos desde el formulario
             System.out.println("Datos recibidos: cod_usu:" + usuario.getCod_usu() + ", ali_usu"+ usuario.getAli_usu()  + ", ema_usu"+ usuario.getEma_usu()  + ", cla_usu" + usuario.getCla_usu()  + ", est_usu"+ usuario.getEst_usu());
@@ -86,7 +85,7 @@ public class usuarioController {
         try {
             Integer resultado = usuarioServicio.modificarUsuario(usuario);
             if (resultado != null) {
-                redirect.addFlashAttribute("mensaje", "ROL MODIFICADO EXITOSAMENTE");
+                redirect.addFlashAttribute("mensaje", "usuario MODIFICADO EXITOSAMENTE");
             } else {
                 redirect.addFlashAttribute("error", "Error al modificar");
             }
